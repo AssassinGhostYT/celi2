@@ -471,53 +471,27 @@ phrases.forEach((phrase, index) => {
 scene.add(textsGroup);
 
 // -------------------------------------------------------------
-// 7. 10 CARTAS INTERACTIVAS
+// 7. 10 CARTAS INTERACTIVAS CON IMÁGENES DE LA RAÍZ
 // -------------------------------------------------------------
 const cardsData = [
-  { frontColor: "#ff4d6d", icon: "❤️", text: "Eres mi lugar favorito en el mundo" },
-  { frontColor: "#ff758f", icon: "💖", text: "Cada segundo a tu lado vale oro" },
-  { frontColor: "#c77dff", icon: "💌", text: "Me haces sonreír sin darme cuenta" },
-  { frontColor: "#e0aaff", icon: "✨", text: "Tu mirada ilumina todo mi universo" },
-  { frontColor: "#ffb3c1", icon: "🌸", text: "Contigo todo es más bonito" },
-  { frontColor: "#ff85a1", icon: "🧸", text: "Gracias por existir en mi vida" },
-  { frontColor: "#9d4edd", icon: "💓", text: "Mi corazón late más fuerte por ti" },
-  { frontColor: "#ff9ebb", icon: "💭", text: "Eres mi pensamiento favorito" },
-  { frontColor: "#f72585", icon: "🌹", text: "Te elegiría mil veces más" },
-  { frontColor: "#7209b7", icon: "💍", text: "Juntos hacemos la mejor historia" }
+  { image: 'IMG-20261111-WA0025.jpg', frontColor: '#ff4d6d', message: 'Eres mi lugar favorito en el mundo' },
+  { image: 'IMG-20261111-WA0027.jpg', frontColor: '#ff758f', message: 'Cada segundo a tu lado vale oro' },
+  { image: 'IMG-20261111-WA0031.jpg', frontColor: '#c77dff', message: 'Me haces sonreír sin darme cuenta' },
+  { image: 'IMG-20261111-WA0032.jpg', frontColor: '#e0aaff', message: 'Tu mirada ilumina todo mi universo' },
+  { image: 'IMG-20261111-WA0037.jpg', frontColor: '#ffb3c1', message: 'Contigo todo es más bonito' },
+  { image: 'IMG-20261111-WA0038.jpg', frontColor: '#ff85a1', message: 'Gracias por existir en mi vida' },
+  { image: 'IMG-20261111-WA0040.jpg', frontColor: '#9d4edd', message: 'Mi corazón late más fuerte por ti' },
+  { image: 'IMG-20261111-WA0043.jpg', frontColor: '#ff9ebb', message: 'Eres mi pensamiento favorito' },
+  { image: 'IMG-20261111-WA0044.jpg', frontColor: '#f72585', message: 'Te elegiría mil veces más' },
+  { image: 'IMG-20261111-WA0046.jpg', frontColor: '#7209b7', message: 'Juntos hacemos la mejor historia' }
 ];
 
-function createCardFrontTexture(icon, color) {
-  const canvasCard = document.createElement('canvas');
-  const ctx = canvasCard.getContext('2d');
-  canvasCard.width = 256;
-  canvasCard.height = 360;
+const textureLoader = new THREE.TextureLoader();
 
-  const grad = ctx.createLinearGradient(0, 0, 0, canvasCard.height);
-  grad.addColorStop(0, '#ffffff');
-  grad.addColorStop(1, '#ffe5ec');
-
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, canvasCard.width, canvasCard.height);
-
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 8;
-  ctx.strokeRect(12, 12, canvasCard.width - 24, canvasCard.height - 24);
-
-  ctx.strokeStyle = '#ffb3c1';
-  ctx.lineWidth = 2;
-  ctx.strokeRect(18, 18, canvasCard.width - 36, canvasCard.height - 36);
-
-  ctx.fillStyle = color;
-  ctx.font = '85px Arial';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(icon, canvasCard.width / 2, canvasCard.height / 2 - 10);
-
-  ctx.font = '22px Arial';
-  ctx.fillText('♥', 35, 42);
-  ctx.fillText('♥', canvasCard.width - 35, canvasCard.height - 42);
-
-  return new THREE.CanvasTexture(canvasCard);
+function createCardFrontTexture(imageName) {
+  const texture = textureLoader.load(imageName);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
 }
 
 function createCardBackTexture(text, color) {
@@ -569,8 +543,8 @@ const cardMeshes = [];
 cardsData.forEach((data, index) => {
   const cardGeo = new THREE.PlaneGeometry(0.32, 0.45);
 
-  const frontTex = createCardFrontTexture(data.icon, data.frontColor);
-  const backTex = createCardBackTexture(data.text, data.frontColor);
+  const frontTex = createCardFrontTexture(data.image);
+  const backTex = createCardBackTexture(data.message, data.frontColor);
 
   const matFront = new THREE.MeshBasicMaterial({ map: frontTex, side: THREE.FrontSide });
   const matBack = new THREE.MeshBasicMaterial({ map: backTex, side: THREE.BackSide });
