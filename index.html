@@ -9,6 +9,32 @@
 <body>
 <canvas class="webgl"></canvas>
 
+<section class="memory-gallery" aria-label="Galería de recuerdos">
+  <div class="gallery-heading">
+    <span class="gallery-kicker">UN UNIVERSO DE RECUERDOS</span>
+    <h1>Nuestros momentos <span>♥</span></h1>
+  </div>
+  <div class="memory-track" id="memory-track" aria-label="Toca una foto para abrir su carta"></div>
+</section>
+
+<div class="letter-modal" id="letter-modal" aria-hidden="true" hidden>
+  <button class="letter-close" id="letter-close" type="button" aria-label="Cerrar carta">×</button>
+  <p class="letter-hint">Toca la carta para darle la vuelta</p>
+  <div class="letter-card" id="letter-card" role="button" tabindex="0" aria-label="Dar la vuelta a la carta">
+    <div class="letter-card-inner">
+      <div class="letter-face letter-front">
+        <img id="letter-image" alt="">
+        <div class="letter-caption"><span id="letter-number"></span><h2 id="letter-title"></h2></div>
+      </div>
+      <div class="letter-face letter-back">
+        <span class="letter-heart">♥</span>
+        <p id="letter-message"></p>
+        <span class="letter-signoff">Con todo mi amor, para ti</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <button class="music-toggle" id="music-toggle" type="button" aria-label="Activar la música">🔇</button>
 <div class="music-hint" id="music-hint">🎵 Toca la pantalla para activar la música</div>
 <div id="music-player" aria-hidden="true"></div>
@@ -23,6 +49,7 @@
 </script>
 
 <script type="module" src="script.js"></script>
+<script src="cards-ui.js"></script>
 <script src="music.js"></script>
 </body>
 </html>
