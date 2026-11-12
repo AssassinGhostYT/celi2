@@ -71,7 +71,6 @@ const memories = [
   }
 ];
 
-const track = document.querySelector('#memory-track');
 const modal = document.querySelector('#letter-modal');
 const card = document.querySelector('#letter-card');
 const closeButton = document.querySelector('#letter-close');
@@ -81,24 +80,10 @@ const number = document.querySelector('#letter-number');
 const message = document.querySelector('#letter-message');
 let previouslyFocused = null;
 
-memories.forEach((memory, index) => {
-  const button = document.createElement('button');
-  button.className = 'memory-tile';
-  button.type = 'button';
-  button.setAttribute('aria-label', `Abrir la carta ${index + 1}: ${memory.title}`);
-
-  const image = document.createElement('img');
-  image.src = memory.image;
-  image.alt = memory.title;
-  image.loading = 'lazy';
-  image.decoding = 'async';
-
-  const label = document.createElement('span');
-  label.textContent = memory.title;
-
-  button.append(image, label);
-  button.addEventListener('click', () => openMemory(memory, index));
-  track.append(button);
+// Las cartas se abren al tocar las fotos 3D que orbitan en la espiral.
+window.addEventListener('open-spiral-memory', (event) => {
+  const index = Number(event.detail?.index);
+  if (Number.isInteger(index) && memories[index]) openMemory(memories[index], index);
 });
 
 function openMemory(memory, index) {
@@ -114,7 +99,7 @@ function openMemory(memory, index) {
   document.body.classList.add('letter-open');
   closeButton.focus();
 
-  // Primero se aprecia la foto ampliada y luego aparece el mensaje de amor.
+  // Se muestra primero la foto ampliada y luego se voltea para revelar el mensaje.
   requestAnimationFrame(() => {
     requestAnimationFrame(() => card.classList.add('is-flipped'));
   });
@@ -126,6 +111,7 @@ function closeMemory() {
   modal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('letter-open');
   card.classList.remove('is-flipped');
+  window.dispatchEvent(new Event('close-spiral-memory'));
   if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
 }
 
