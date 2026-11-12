@@ -35,6 +35,11 @@ const memories = [
     message: 'Mi corazón siempre encuentra el camino de vuelta a ti. Te quiero con todo lo que soy.'
   },
   {
+    image: 'IMG-20261111-WA0042.jpg',
+    title: 'Un recuerdo especial',
+    message: 'Guardo cada momento contigo como un pequeño tesoro que siempre me hace sonreír.'
+  },
+  {
     image: 'IMG-20261111-WA0043.jpg',
     title: 'Pienso en ti',
     message: 'Eres ese pensamiento bonito que aparece en cualquier momento y me alegra el día.'
@@ -48,11 +53,6 @@ const memories = [
     image: 'IMG-20261111-WA0046.jpg',
     title: 'Nuestra historia',
     message: 'Lo nuestro es mi historia favorita. Ojalá sigamos escribiendo juntos muchos capítulos más.'
-  },
-  {
-    image: 'IMG-20261111-WA0042.jpg',
-    title: 'Un recuerdo especial',
-    message: 'Guardo cada momento contigo como un pequeño tesoro que siempre me hace sonreír.'
   },
   {
     image: 'IMG-20261111-WA0047.jpg',
@@ -97,7 +97,7 @@ function openMemory(memory, index) {
   photo.src = memory.image;
   photo.alt = memory.title;
   title.textContent = memory.title;
-  number.textContent = `Recuerdo ${String(index + 1).padStart(2, '0')} de ${String(memories.length).padStart(2, '0')}`;
+  number.textContent = `RECUERDO ${String(index + 1).padStart(2, '0')} · ${String(memories.length).padStart(2, '0')}`;
   message.textContent = memory.message;
   card.classList.remove('is-flipped');
   modal.hidden = false;
@@ -105,8 +105,8 @@ function openMemory(memory, index) {
   document.body.classList.add('letter-open');
   closeButton.focus();
 
-  // Primero se disfruta la foto ampliada y luego la carta gira para revelar el mensaje.
-  flipTimer = window.setTimeout(() => card.classList.add('is-flipped'), 950);
+  // Deja disfrutar la foto a pantalla grande antes de girar y revelar la carta.
+  flipTimer = window.setTimeout(() => card.classList.add('is-flipped'), 1450);
 }
 
 function closeMemory() {

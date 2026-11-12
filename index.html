@@ -10,19 +10,22 @@
 <body>
 <canvas class="webgl"></canvas>
 
-<div class="letter-modal" id="letter-modal" aria-hidden="true" hidden>
+<div class="letter-modal" id="letter-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Carta de recuerdo" hidden>
   <button class="letter-close" id="letter-close" type="button" aria-label="Cerrar carta">×</button>
-  <p class="letter-hint">Toca la carta para darle la vuelta</p>
+  <p class="letter-hint">Un recuerdo para ti <span aria-hidden="true">✦</span> Toca la carta para girarla</p>
   <div class="letter-card" id="letter-card" role="button" tabindex="0" aria-label="Dar la vuelta a la carta">
     <div class="letter-card-inner">
       <div class="letter-face letter-front">
         <img id="letter-image" alt="">
-        <div class="letter-caption"><span id="letter-number"></span><h2 id="letter-title"></h2></div>
+        <div class="letter-caption"><span id="letter-number"></span><h2 id="letter-title"></h2><p class="letter-front-note">Un instante nuestro, guardado para siempre <span aria-hidden="true">♥</span></p></div>
       </div>
       <div class="letter-face letter-back">
-        <span class="letter-heart">♥</span>
+        <div class="letter-back-ornament" aria-hidden="true">✧　♥　✧</div>
+        <span class="letter-back-label">PARA TI, CON TODO MI AMOR</span>
+        <span class="letter-heart" aria-hidden="true">♥</span>
         <p id="letter-message"></p>
-        <span class="letter-signoff">Con todo mi amor, para ti</span>
+        <span class="letter-signoff">Con todo mi amor,<br><strong>siempre tuyo</strong> <span aria-hidden="true">♡</span></span>
+        <div class="letter-back-ornament letter-back-ornament-bottom" aria-hidden="true">✧　♡　✧</div>
       </div>
     </div>
   </div>
