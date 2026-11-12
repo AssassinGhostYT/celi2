@@ -9,6 +9,10 @@
 <body>
 <canvas class="webgl"></canvas>
 
+<button class="music-toggle" id="music-toggle" type="button" aria-label="Activar la música">🔇</button>
+<div class="music-hint" id="music-hint">🎵 Toca la pantalla para activar la música</div>
+<div id="music-player" aria-hidden="true"></div>
+
 <script type="importmap">
 {
   "imports": {
@@ -19,5 +23,6 @@
 </script>
 
 <script type="module" src="script.js"></script>
+<script src="music.js"></script>
 </body>
 </html>

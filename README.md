@@ -19,7 +19,12 @@ Una galaxia interactiva en 3D hecha con **Three.js** para Celisbeth: espiral de 
 - **Arrastra** para girar la cámara 360°.
 - **Pellizca / rueda del ratón** para acercar o alejar.
 - **Toca una carta** para girarla y leer el mensaje.
+- **Toca la pantalla** para activar la música; el botón 🔊 de arriba a la derecha la silencia.
+
+## Música
+
+Suena **“If Forever Has A Name, It's You” — Ed Sheeran** ([YouTube](https://youtu.be/1Qa4UZQBzBY)) mediante el reproductor oficial de YouTube. Los navegadores bloquean el audio hasta que la persona toca la pantalla, por eso arranca con el primer toque en cualquier lugar.
 
 ## Créditos
 
-Hecho con [Three.js](https://threejs.org/).
+Hecho con [Three.js](https://threejs.org/). La música pertenece a sus autores y se reproduce desde YouTube.
