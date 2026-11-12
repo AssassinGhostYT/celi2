@@ -80,7 +80,6 @@ const number = document.querySelector('#letter-number');
 const message = document.querySelector('#letter-message');
 let previouslyFocused = null;
 
-// Las cartas se abren al tocar las fotos 3D que orbitan en la espiral.
 window.addEventListener('open-spiral-memory', (event) => {
   const index = Number(event.detail?.index);
   if (Number.isInteger(index) && memories[index]) openMemory(memories[index], index);
@@ -99,7 +98,6 @@ function openMemory(memory, index) {
   document.body.classList.add('letter-open');
   closeButton.focus();
 
-  // Se muestra primero la foto ampliada y luego se voltea para revelar el mensaje.
   requestAnimationFrame(() => {
     requestAnimationFrame(() => card.classList.add('is-flipped'));
   });
