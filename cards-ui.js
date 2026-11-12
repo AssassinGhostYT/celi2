@@ -50,6 +50,11 @@ const memories = [
     message: 'Lo nuestro es mi historia favorita. Ojalá sigamos escribiendo juntos muchos capítulos más.'
   },
   {
+    image: 'IMG-20261111-WA0042.jpg',
+    title: 'Un recuerdo especial',
+    message: 'Guardo cada momento contigo como un pequeño tesoro que siempre me hace sonreír.'
+  },
+  {
     image: 'IMG-20261111-WA0047.jpg',
     title: 'Siempre tú',
     message: 'Entre tantas personas y tantos caminos, mi corazón siempre termina escogiendo el tuyo.'
@@ -79,6 +84,7 @@ const title = document.querySelector('#letter-title');
 const number = document.querySelector('#letter-number');
 const message = document.querySelector('#letter-message');
 let previouslyFocused = null;
+let flipTimer;
 
 window.addEventListener('open-spiral-memory', (event) => {
   const index = Number(event.detail?.index);
@@ -87,10 +93,11 @@ window.addEventListener('open-spiral-memory', (event) => {
 
 function openMemory(memory, index) {
   previouslyFocused = document.activeElement;
+  window.clearTimeout(flipTimer);
   photo.src = memory.image;
   photo.alt = memory.title;
   title.textContent = memory.title;
-  number.textContent = `Recuerdo ${String(index + 1).padStart(2, '0')}`;
+  number.textContent = `Recuerdo ${String(index + 1).padStart(2, '0')} de ${String(memories.length).padStart(2, '0')}`;
   message.textContent = memory.message;
   card.classList.remove('is-flipped');
   modal.hidden = false;
@@ -98,13 +105,13 @@ function openMemory(memory, index) {
   document.body.classList.add('letter-open');
   closeButton.focus();
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => card.classList.add('is-flipped'));
-  });
+  // Primero se disfruta la foto ampliada y luego la carta gira para revelar el mensaje.
+  flipTimer = window.setTimeout(() => card.classList.add('is-flipped'), 950);
 }
 
 function closeMemory() {
   if (modal.hidden) return;
+  window.clearTimeout(flipTimer);
   modal.hidden = true;
   modal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('letter-open');
@@ -114,6 +121,7 @@ function closeMemory() {
 }
 
 function flipMemory() {
+  window.clearTimeout(flipTimer);
   card.classList.toggle('is-flipped');
 }
 
